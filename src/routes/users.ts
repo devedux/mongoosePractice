@@ -1,0 +1,11 @@
+import {Router} from 'express';
+import { postUsuario, updateUsuario, getUsuario, deleteUsuario, logged, loggedGoogle } from '../controllers/users';
+import { verificaToken, verificaAdmin_Role } from '../middlewares/authentication';
+export const user_router = Router();
+user_router.post('/user', verificaToken, verificaAdmin_Role,postUsuario);
+user_router.put('/user/:id', verificaToken , verificaAdmin_Role,updateUsuario );
+user_router.get('/users' , verificaToken ,getUsuario  );
+user_router.delete('/user/:id', verificaToken, verificaAdmin_Role ,deleteUsuario );
+user_router.post('/login' ,logged );
+user_router.post('/google', loggedGoogle);
+// user_router.post('/login', verificaToken ,logged );
